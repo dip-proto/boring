@@ -77,6 +77,9 @@ pub fn init() {
     let init_options = OPENSSL_INIT_LOAD_SSL_STRINGS;
 
     INIT.call_once(|| {
-        assert!(unsafe { OPENSSL_init_ssl(init_options.try_into().unwrap(), ptr::null_mut()) } == 1)
+        assert_eq!(
+            unsafe { OPENSSL_init_ssl(init_options.try_into().unwrap(), ptr::null_mut()) },
+            1
+        )
     });
 }
